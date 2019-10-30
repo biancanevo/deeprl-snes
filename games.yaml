@@ -97,7 +97,7 @@ games:
       ['LEFT','Z'], ['RIGHT','Z'], ['UP','Z'], ['DOWN','Z'],  # Move around
       ['UP', 'LEFT','Z'], ['UP', 'RIGHT','Z'], ['DOWN', 'LEFT','Z'], ['DOWN', 'RIGHT','Z'],
 
-      ['A'], ['B'], ['C']  # Kicks
+      ['A'], ['B'], ['C'],  # Kicks
       #actions with Kicks
       ['LEFT','A'], ['RIGHT','A'], ['UP','A'], ['DOWN','A'],  # Move around
       ['UP', 'LEFT','A'], ['UP', 'RIGHT','A'], ['DOWN', 'LEFT','A'], ['DOWN', 'RIGHT','A'],
@@ -106,7 +106,7 @@ games:
       ['UP', 'LEFT','B'], ['UP', 'RIGHT','B'], ['DOWN', 'LEFT','B'], ['DOWN', 'RIGHT','B'],
 
       ['LEFT','C'], ['RIGHT','C'], ['UP','C'], ['DOWN','C'],  # Move around
-      ['UP', 'LEFT','C'], ['UP', 'RIGHT','C'], ['DOWN', 'LEFT','C'], ['DOWN', 'RIGHT','C'],
+      ['UP', 'LEFT','C'], ['UP', 'RIGHT','C'], ['DOWN', 'LEFT','C'], ['DOWN', 'RIGHT','C']
 
     ]
   SuperMarioWorld-Snes:
