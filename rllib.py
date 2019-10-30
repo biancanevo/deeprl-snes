@@ -46,6 +46,10 @@ def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=Non
         env = envs.ProcessedMovieRecorder(env, fileprefix="processed", mode=makeprocessedmovie)
     env = envs.FrameStack(env, stackframes)
     env = envs.RewardTimeDump(env, timepenalty)
+    #bubllebobble
+    #env= envs.BBReward_wrapper(env)
+    #SF II
+    env = envs.EnvStreetFighterII(env)
     return env
 
 

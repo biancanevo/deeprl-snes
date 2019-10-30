@@ -85,8 +85,29 @@ games:
       [],  # No-op
       ['LEFT'], ['RIGHT'], ['UP'], ['DOWN'],  # Move around
       ['UP', 'LEFT'], ['UP', 'RIGHT'], ['DOWN', 'LEFT'], ['DOWN', 'RIGHT'],  # Diagonals
+
       ['X'], ['Y'], ['Z'],  # Punches
+      #actions with Punches
+      ['LEFT','X'], ['RIGHT','X'], ['UP','X'], ['DOWN','X'],  # Move around
+      ['UP', 'LEFT','X'], ['UP', 'RIGHT','X'], ['DOWN', 'LEFT','X'], ['DOWN', 'RIGHT','X'],
+
+      ['LEFT','Y'], ['RIGHT','Y'], ['UP','Y'], ['DOWN','Y'],  # Move around
+      ['UP', 'LEFT','Y'], ['UP', 'RIGHT','Y'], ['DOWN', 'LEFT','Y'], ['DOWN', 'RIGHT','Y'],
+
+      ['LEFT','Z'], ['RIGHT','Z'], ['UP','Z'], ['DOWN','Z'],  # Move around
+      ['UP', 'LEFT','Z'], ['UP', 'RIGHT','Z'], ['DOWN', 'LEFT','Z'], ['DOWN', 'RIGHT','Z'],
+
       ['A'], ['B'], ['C']  # Kicks
+      #actions with Kicks
+      ['LEFT','A'], ['RIGHT','A'], ['UP','A'], ['DOWN','A'],  # Move around
+      ['UP', 'LEFT','A'], ['UP', 'RIGHT','A'], ['DOWN', 'LEFT','A'], ['DOWN', 'RIGHT','A'],
+
+      ['LEFT','B'], ['RIGHT','B'], ['UP','B'], ['DOWN','B'],  # Move around
+      ['UP', 'LEFT','B'], ['UP', 'RIGHT','B'], ['DOWN', 'LEFT','B'], ['DOWN', 'RIGHT','B'],
+
+      ['LEFT','C'], ['RIGHT','C'], ['UP','C'], ['DOWN','C'],  # Move around
+      ['UP', 'LEFT','C'], ['UP', 'RIGHT','C'], ['DOWN', 'LEFT','C'], ['DOWN', 'RIGHT','C'],
+
     ]
   SuperMarioWorld-Snes:
     gamepad: "snes"
@@ -98,4 +119,11 @@ games:
       ['X'], ['X', 'LEFT'], ['X', 'RIGHT'],  # Run
       ['DOWN'],  # Crouch
       ['SELECT']  # Drops reserve item
+    ]
+  BubbleBobble-Nes:
+    gamepad: "nes"
+    actions: [
+      [],  # No-op
+      ['A'],['B'],  # Fire
+      ['LEFT'], ['RIGHT']  # Basic directions
     ]
