@@ -38,6 +38,8 @@ def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=Non
     env = envs.RewardScaler(env, rewardscaling)
     if cliprewards:
         env = envs.RewardClipper(env)
+    #env = envs.BBReward_wrapper(env)
+    env = envs.EnvStreetFighterII(env)
     env = envs.SkipFrames(env, skip=skipframes, pad_action=pad_action, maxpool=maxpoolframes)
     if makemovie is not None:
         env = envs.MovieRecorder(env, fileprefix="raw", mode=makemovie)
@@ -153,10 +155,11 @@ ALGORITHMS = {
             "observation_filter": "NoFilter",
             "vf_share_layers": True,
             "num_gpus": 1,
-            "lr_schedule": [
-                [0, 0.0005],
-                [20000000, 0.000000000001],
-            ]
+            # "lr_schedule": [
+            #     [0, 0.0005],
+            #     [600000000, 0.000000000001],
+            # ]
+            "lr": 5e-7
         }
     },
     # Parameters from https://github.com/ray-project/ray/blob/master/python/ray/rllib/tuned_examples/atari-ppo.yaml

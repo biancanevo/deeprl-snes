@@ -99,3 +99,11 @@ games:
       ['DOWN'],  # Crouch
       ['SELECT']  # Drops reserve item
     ]
+  BubbleBobble-Nes:
+    gamepad: "nes"
+    actions: [
+    [],  # No-op
+    ['LEFT'], ['RIGHT'],  # Move around
+    ['A'],   # Spin jumps
+    ['B']
+    ]
