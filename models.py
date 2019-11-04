@@ -51,7 +51,7 @@ class ResNet(Model):
 
         layer4 = Flatten()(layer3)
         layer5 = Activation('relu')(layer4)
-        layer5 = Dense(256, activation='relu')(layer5)
+        layer5 = Dense(512, activation='relu')(layer5)
         output = Dense(num_outputs, activation=None)(layer5)
 
         return output, layer5

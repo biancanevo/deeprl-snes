@@ -36,6 +36,10 @@ def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=Non
     """
     env = envs.NoopResetEnv(env)
     env = envs.RewardScaler(env, rewardscaling)
+    #bubllebobble
+    #env= envs.BBReward_wrapper(env)
+    #SF II
+    env = envs.EnvStreetFighterII(env)
     if cliprewards:
         env = envs.RewardClipper(env)
     env = envs.SkipFrames(env, skip=skipframes, pad_action=pad_action, maxpool=maxpoolframes)
@@ -46,10 +50,6 @@ def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=Non
         env = envs.ProcessedMovieRecorder(env, fileprefix="processed", mode=makeprocessedmovie)
     env = envs.FrameStack(env, stackframes)
     env = envs.RewardTimeDump(env, timepenalty)
-    #bubllebobble
-    #env= envs.BBReward_wrapper(env)
-    #SF II
-    env = envs.EnvStreetFighterII(env)
     return env
 
 
@@ -159,8 +159,8 @@ ALGORITHMS = {
             "num_gpus": 1,
             "lr_schedule": [
                 [0, 0.0005],
-                [10000, 0.0005],
                 [1000000, 0.000005],
+                [100000000, 0.00000005],
             ]
         }
     },

@@ -410,7 +410,6 @@ class EnvStreetFighterII(gym.RewardWrapper):
         self._obs, _, self.done, _info = self.env.step(action)
         #self._rew = (((self._info['health'] - _info['health'])-(self._info['enemy_health'] - _info['enemy_health'])) / 176)
         delta = (((self._info['enemy_health'] - _info['enemy_health']) - (self._info['health'] - _info['health'])))
-
         #self._rew = (sigmoid(delta / 20)) - 0.5
         self._rew = delta
         self._info = _info
@@ -424,13 +423,13 @@ class EnvStreetFighterII(gym.RewardWrapper):
             if self._info['enemy_health'] < 0:
                 self.counted = True
                 self.win_nb += 1
-                self._rew = 1
+                self._rew = 50 + (5 * (self.win_nb // 2))
                 self.lastHundred.append(1)
             # Enemy Wins!
             elif self._info['health'] < 0:
                 self.counted = True
                 self.lose_nb += 1
-                #self._rew = -1
+                self._rew = - 50 + (self.win_nb // 2)
                 self.lastHundred.append(-1)
             # Timeout
             if self.done:
@@ -440,12 +439,11 @@ class EnvStreetFighterII(gym.RewardWrapper):
             if len(self.lastHundred) > 100:
                 self.lastHundred.pop(0)
         self.episode_reward += self._rew
+        # if self._rew != 0:
+        #     print(self._rew)
         #if self._rew != 0.0:
         #    print("delta: ", delta, "Sigmoid: ",self._rew)
         #rewrite episode reward
         #if self.done:
         #    self._info['episode']['r']  = self.episode_reward
         return self._obs, self._rew, self.done, self._info
-
-    def get_episode_reward(self):
-        return round(self.episode_reward * self._info['score'], 6)

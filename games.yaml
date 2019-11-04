@@ -107,7 +107,6 @@ games:
 
       ['LEFT','C'], ['RIGHT','C'], ['UP','C'], ['DOWN','C'],  # Move around
       ['UP', 'LEFT','C'], ['UP', 'RIGHT','C'], ['DOWN', 'LEFT','C'], ['DOWN', 'RIGHT','C']
-
     ]
   SuperMarioWorld-Snes:
     gamepad: "snes"
