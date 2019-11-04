@@ -59,29 +59,23 @@ class BBReward_wrapper(gym.RewardWrapper):
 class EnvStreetFighterII(gym.RewardWrapper):
 
 
-    def __init__(self, env, agent_name="default", show_env=False, recording=False):
+    def __init__(self, env):
         super(EnvStreetFighterII, self).__init__(env)
 
-        self.show_env = show_env
         self._obs = None
         self._rew = None
         self._info = {'enemy_matches_won': 0, 'score': 0, 'matches_won': 0, 'continuetimer': 0, 'enemy_health': 176,
                       'health': 176}
         self.counted = False
-        self.lastHundred = []
+        self.multiplier = 1
         self.win_nb = 0
         self.lose_nb = 0
         self.timeout_nb = 0
-        self.env.reward_range = (-5, 10)
-
-        if recording:
-            env.auto_record("../recording/{an}".format(an=agent_name))
 
         #tensorboard writer
         #self.writer = SummaryWriter(comment="-"+HYPERPARAMS['run_name']+"-"+agent_name)
 
     def reset(self):
-        self.lastHundred = []
         self.win_nb = 0
         self.lose_nb = 0
         self.timeout_nb = 0
@@ -100,7 +94,7 @@ class EnvStreetFighterII(gym.RewardWrapper):
         # get reward
         self._obs, _, self.done, _info = self.env.step(action)
         #self._rew = (((self._info['health'] - _info['health'])-(self._info['enemy_health'] - _info['enemy_health'])) / 176)
-        delta = (((self._info['enemy_health'] - _info['enemy_health']) - (self._info['health'] - _info['health'])))
+        delta = ((self.multiplier * (self._info['enemy_health'] - _info['enemy_health']) - (self._info['health'] - _info['health'])))
 
         self._rew = (sigmoid(delta / 20)) - 0.5
 
@@ -116,25 +110,24 @@ class EnvStreetFighterII(gym.RewardWrapper):
                 self.counted = True
                 self.win_nb += 1
                 self._rew = 1
-                self.lastHundred.append(1)
+                if self.win_nb % 2 == 0 and not self.counted:
+                    self.multiplier += 0.05
+                self.counted = True
             # Enemy Wins!
             elif self._info['health'] < 0:
                 self.counted = True
                 self.lose_nb += 1
-                #self._rew = -1
-                self.lastHundred.append(-1)
+		self._rew = 0
             # Timeout
             if self.done:
                 self.counted = True
                 self.timeout_nb += 1
             # clean up last hundreds
-            if len(self.lastHundred) > 100:
-                self.lastHundred.pop(0)
-        self.episode_reward += self._rew
         #if self._rew != 0.0:
         #    print("delta: ", delta, "Sigmoid: ",self._rew)
         #rewrite episode reward
-       # if self.done:
+        self.episode_reward += self._rew
+        #if self.done:
         #    self._info['episode']['r']  = self.episode_reward
         return self._obs, self._rew, self.done, self._info
 

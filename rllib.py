@@ -155,11 +155,12 @@ ALGORITHMS = {
             "observation_filter": "NoFilter",
             "vf_share_layers": True,
             "num_gpus": 1,
-            # "lr_schedule": [
-            #     [0, 0.0005],
-            #     [600000000, 0.000000000001],
-            # ]
-            "lr": 5e-7
+            "lr_schedule": [
+                [0, 5e-5],
+                [1000000, 5e-5],
+                [100000000, 5e-6],
+                [1000000000, 5e-7],
+            ]
         }
     },
     # Parameters from https://github.com/ray-project/ray/blob/master/python/ray/rllib/tuned_examples/atari-ppo.yaml
