@@ -19,7 +19,7 @@ import copy
 
 
 def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=None, keepcolor=False,
-             stackframes=4, timepenalty=0, makemovie=None, makeprocessedmovie=None, cliprewards=False):
+             stackframes=4, timepenalty=0, makemovie=None, makeprocessedmovie=None, cliprewards=False, game=None ):
     """Wraps a game environment with many preprocessing options
 
         base: base environment to wrap
@@ -38,8 +38,10 @@ def wrap_env(env, rewardscaling=1, skipframes=4, maxpoolframes=1, pad_action=Non
     env = envs.RewardScaler(env, rewardscaling)
     if cliprewards:
         env = envs.RewardClipper(env)
-    #env = envs.BBReward_wrapper(env)
-    env = envs.EnvStreetFighterII(env)
+    if game == 'BubbleBobble-Nes':
+        env = envs.BBReward_wrapper(env)
+    if game == 'StreetFighterIISpecialChampionEdition-Genesis':
+        env = envs.EnvStreetFighterII(env)
     env = envs.SkipFrames(env, skip=skipframes, pad_action=pad_action, maxpool=maxpoolframes)
     if makemovie is not None:
         env = envs.MovieRecorder(env, fileprefix="raw", mode=makemovie)
@@ -55,7 +57,7 @@ def retro_env_creator(game, state, **kwargs):
     """Returns a function that creates a new retro environment the given game, state, and wrapper configuration"""
     base = retro.make(game=game, state=state)
     base = envs.ButtonsRemapper(base, game)
-    return wrap_env(base, **kwargs)
+    return wrap_env(base, game=game, **kwargs)
 
 
 def register_retro(game, state, registername="retro-v0", **kwargs):

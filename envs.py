@@ -415,7 +415,7 @@ class MovieRecorder(gym.ObservationWrapper):
         import moviepy.editor as mpy
         if len(self.frames) > 0:
             if self.mode == "all" or (self.mode == "best" and self.improves_best(self.episode_reward)):
-                clip = mpy.ImageSequenceClip(self.frames, fps=60)
+                clip = mpy.ImageSequenceClip(self.frames, fps=15)
                 filename = f"{self.fileprefix}_reward{self.episode_reward}_{id_generator()}.mp4"
                 clip.write_videofile(filename)
             if self.best_reward < self.episode_reward:
