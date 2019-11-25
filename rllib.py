@@ -145,7 +145,7 @@ ALGORITHMS = {
         "default_conf": ppo.DEFAULT_CONFIG,
         "conf": {
             "lambda": 0.95,
-            "kl_coeff": 0.5,
+            "kl_coeff": 0.75,
             "clip_param": 0.1,
             "entropy_coeff": 0.01,
             "sample_batch_size": 500,
